@@ -1,19 +1,33 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
+import GistListContainer from "./containers/GistListContainer";
+import { Provider } from "react-redux";
+import store from "./store";
+import StylesConsts from "./styles/consts";
+import { Header } from "react-native-elements";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    marginStart: StylesConsts.rootMarginSide,
+    marginEnd: StylesConsts.rootMarginSide,
+    marginVertical: 10,
   },
 });
 
 export default function App(): JSX.Element {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Provider store={store}>
+      <Header
+        centerComponent={{ text: "Gistive", style: { color: "#ffffff", fontSize: 20, fontWeight: "500" } }}
+        containerStyle={{
+          backgroundColor: "#454ADE",
+          paddingVertical: 10,
+        }}
+      />
+      <SafeAreaView style={styles.container}>
+        <GistListContainer />
+      </SafeAreaView>
+    </Provider>
   );
 }

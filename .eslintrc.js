@@ -5,32 +5,35 @@ module.exports = {
   ],
   rules: {
     quotes: ["error", "double"],
-    "eol-last": ["error", "always"]
+    "eol-last": ["error", "always"],
+    "comma-dangle": ["error", "always-multiline"],
+    "semi": ["error", "always", {"omitLastInOneLineBlock": true}],
+    "no-multi-spaces": "error",
   },
   settings: {
     react: {
-      version: "detect"
+      version: "detect",
     },
   },
   overrides: [
     {
       parser: "@typescript-eslint/parser",
       plugins: [
-        "@typescript-eslint"
+        "@typescript-eslint",
       ],
       files: "src/**/*.{ts,tsx}",
       extends: [
         "plugin:react/recommended",
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
-      ]
+        "plugin:@typescript-eslint/recommended",
+      ],
     },
     {
       files: ["./*.js"],
       parser: "babel-eslint",
       env: {
-        node: true
-      }
+        node: true,
+      },
     },
     {
       files: ["__tests__/**/*.js"],
@@ -38,11 +41,11 @@ module.exports = {
       plugins: ["jest"],
       extends: [
         "plugin:jest/recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
       ],
       env: {
-        "jest/globals": true
+        "jest/globals": true,
       },
-    }
-  ]
+    },
+  ],
 };
