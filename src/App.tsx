@@ -22,7 +22,7 @@ export default function App(): JSX.Element {
         centerComponent={{ text: "Gistive", style: { color: "#ffffff", fontSize: 20, fontWeight: "500" } }}
         containerStyle={{
           backgroundColor: "#454ADE",
-          padding: 10,
+          paddingVertical: 10,
         }}
       />
       <SafeAreaView style={styles.container}>

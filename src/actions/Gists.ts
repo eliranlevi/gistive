@@ -8,15 +8,22 @@ import { Action } from "redux";
 
 export const getGists = (): ThunkAction<void, RootState, unknown, Action<string>> => (
   async (dispatch, getState): Promise<void> => {
-    const gistsResponse = await callGetGists(getUsername(getState()));
-    const gists = await gistsResponse.json();
+    try {
+      const gistsResponse = await callGetGists(getUsername(getState()));
+      const gists = await gistsResponse.json();
 
-    dispatch({
-      type: SET_GISTS,
-      payload: gists.map((g: Gist) => ({
-        ...g,
-        title: Object.keys(g.files)[0],
-      })),
-    });
+      dispatch({
+        type: SET_GISTS,
+        payload: gists.map((g: Gist) => ({
+          ...g,
+          title: Object.keys(g.files)[0],
+        })),
+      });
+    } catch {
+      dispatch({
+        type: SET_GISTS,
+        payload: [],
+      });
+    }
   }
 );

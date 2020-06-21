@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Gist } from "../interfaces/common";
 import GistList from "../components/GistList";
-import { getGists } from "../actions/Gists";
+import { getGists } from "../actions/gists";
 
 interface DispatchProps {
   getGists: () => void;
