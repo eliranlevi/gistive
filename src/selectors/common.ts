@@ -4,4 +4,4 @@ import { RootState } from "../store";
 
 const getSettings = (state: RootState): SettingsState => state.settings;
 
-export const getUsername = createSelector(getSettings, ({ username = "" }) => username);
+export const getToken = createSelector(getSettings, ({ token = "" }) => token);

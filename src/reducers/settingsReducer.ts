@@ -2,11 +2,11 @@ import { SET_SETTINGS } from "../actionTypes/settings";
 import { Action } from "../store/interfaces";
 
 export interface SettingsState {
-  username?: string;
+  token?: string;
 }
 
 const defaultState = {
-  username: "",
+  token: "",
 };
 
 const SettingsReducer = (state: SettingsState = defaultState, action: Action<SettingsState>): SettingsState => {

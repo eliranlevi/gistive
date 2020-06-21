@@ -3,12 +3,12 @@ import { ThunkAction } from "redux-thunk";
 import { RootState } from "../store";
 import { Action } from "redux";
 
-export const setSettings = (username: string): ThunkAction<void, RootState, unknown, Action<string>> => (
+export const setSettings = (token: string): ThunkAction<void, RootState, unknown, Action<string>> => (
   (dispatch): void => {
     dispatch({
       type: SET_SETTINGS,
       payload: {
-        username,
+        token,
       },
     });
   }

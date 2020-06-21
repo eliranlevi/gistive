@@ -7,6 +7,12 @@ const COMMON_OPTIONS: RequestInit = {
   },
 };
 
+export const setAuthHeader = (token: string): void => {
+  COMMON_OPTIONS.headers = {
+    ...COMMON_OPTIONS.headers,
+    "Authorization": `Bearer ${token}`,
+  };
+};
 
 export const callApi = async ({
   url,
@@ -18,8 +24,8 @@ export const callApi = async ({
   });
 };
 
-export const callGetGists = async (username: string): Promise<Response> => {
+export const callGetGists = async (): Promise<Response> => {
   return await callApi({
-    url: GISTS_API(username),
+    url: GISTS_API(),
   });
 };

@@ -2,17 +2,16 @@ import React, { useEffect } from "react";
 import { GistListProps } from "../containers/GistListContainer";
 import GistItem from "./GistItem";
 import { Gist } from "../interfaces/common";
-import { getUsername } from "../selectors/common";
 import store from "../store";
 import { setSettings } from "../actions/settings";
+import { getToken } from "../selectors/common";
 
 const GistList = ({
   gists,
   getGists,
 }: GistListProps): JSX.Element => {
   useEffect(() => {
-    // TODO: get username from storage
-    if (!getUsername(store.getState())) setSettings("");
+    if (!getToken(store.getState())) setSettings("");
     if (!gists.length) getGists();
   });
 
