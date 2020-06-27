@@ -1,10 +1,11 @@
 import { SET_GISTS } from "../actionTypes/gists";
 import { Gist } from "../interfaces/common";
+import { Action } from "../store/interfaces";
 
-const GistsReducer = (state: Gist[] = [], action: any): Gist[] => {
+const GistsReducer = (state: Gist[] = [], action: Action<Gist[]>): Gist[] => {
   switch(action.type) {
     case SET_GISTS: {
-      return action.payload;
+      return action.payload as Gist[];
     }
     default: {
       return state;

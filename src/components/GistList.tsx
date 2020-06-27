@@ -1,26 +1,44 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Icon, Button, Text } from "react-native-elements";
 import { GistListProps } from "../containers/GistListContainer";
-import GistItem from "./GistItem";
 import { Gist } from "../interfaces/common";
-import { getUsername } from "../selectors/common";
-import store from "../store";
-import { setSettings } from "../actions/settings";
+import GistItem from "./GistItem";
+import { View } from "react-native";
 
 const GistList = ({
+  username,
   gists,
   getGists,
 }: GistListProps): JSX.Element => {
-  useEffect(() => {
-    // TODO: get username from storage
-    if (!getUsername(store.getState())) setSettings("");
-    if (!gists.length) getGists();
-  });
-
   return (
     <>
-      {gists.map((gist: Gist): JSX.Element => (
-        <GistItem key={gist.id} gist={gist} />
-      ))}
+      {gists.length
+        ? (
+          gists.map((gist: Gist): JSX.Element => (
+            <GistItem key={gist.id} gist={gist} />
+          ))
+        )
+        : (
+          <View style={{ alignItems: "center", display: "flex", flexDirection: "column" }}>
+            <Text style={{ color: "#939393"}}>
+              No Gists here.
+            </Text>
+            { !username && (
+              <Text style={{ color: "#939393"}}>
+                * Enter username/access token to refresh
+              </Text>
+            )}
+            <Button
+              disabled={!username}
+              titleStyle={{ color: "#939393" }}
+              type="clear"
+              title="Hit to refresh"
+              iconRight
+              onPress={getGists}
+              icon={<Icon type="font-awesome" name="refresh" style={{ paddingLeft: 10}} color="#939393" />}
+            />
+          </View>
+        )}
     </>
   );
 };

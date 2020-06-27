@@ -7,6 +7,12 @@ const COMMON_OPTIONS: RequestInit = {
   },
 };
 
+export const setAuthHeader = (token: string): void => {
+  COMMON_OPTIONS.headers = {
+    ...COMMON_OPTIONS.headers,
+    "Authorization": `Bearer ${token}`,
+  };
+};
 
 export const callApi = async ({
   url,
