@@ -24,8 +24,8 @@ export const callApi = async ({
   });
 };
 
-export const callGetGists = async (): Promise<Response> => {
+export const callGetGists = async (username: string): Promise<Response> => {
   return await callApi({
-    url: GISTS_API(),
+    url: GISTS_API(username),
   });
 };
