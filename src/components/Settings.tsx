@@ -1,7 +1,8 @@
 import React from "react";
-import { SettingsProps } from "../containers/SettingsContainer";
-import { Input } from "react-native-elements";
 import { View } from "react-native";
+import { Input } from "react-native-elements";
+import { SettingsProps } from "../containers/SettingsContainer";
+import StylesConsts from "../styles/consts";
 
 const Settings = ({
   username,
@@ -12,10 +13,14 @@ const Settings = ({
   <View>
     <Input label="Username"
            defaultValue={username}
-           onChangeText={(username): void => setUsername(username)} />
+           placeholder="Enter username"
+           onChangeText={(username): void => setUsername(username)}
+           inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }} />
     <Input label="Access Token"
            defaultValue={token}
-           onChangeText={(token): void => setToken(token)} />
+           placeholder="Enter access token"
+           onChangeText={(token): void => setToken(token)}
+           inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }} />
   </View>
 );
 
