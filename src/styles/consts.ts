@@ -1,9 +1,10 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 const StylesConsts = {
-  rootMarginSide: Dimensions.get("screen").width * 0.04,
+  rootMarginSide: Dimensions.get("screen").width * 0.03,
   textColor: "#939393",
   appColorMain: "#454ADE",
+  bgLight: "#ebebeb",
 };
 
 export const ButtonConsts = StyleSheet.create({

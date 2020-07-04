@@ -15,12 +15,14 @@ const Settings = ({
            defaultValue={username}
            placeholder="Enter username"
            onChangeText={(username): void => setUsername(username)}
-           inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }} />
+           inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }}
+           autoCapitalize="none" />
     <Input label="Access Token"
            defaultValue={token}
            placeholder="Enter access token"
            onChangeText={(token): void => setToken(token)}
-           inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }} />
+           inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }}
+           autoCapitalize="none" />
   </View>
 );
 

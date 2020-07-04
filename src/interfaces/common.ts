@@ -2,6 +2,7 @@ export interface Gist {
   id: string;
   title: string;
   files: GistFile;
+  public: boolean;
 }
 
 export interface ApiRequest {

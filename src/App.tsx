@@ -10,9 +10,6 @@ import StylesConsts, { ButtonConsts } from "./styles/consts";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginStart: StylesConsts.rootMarginSide,
-    marginEnd: StylesConsts.rootMarginSide,
-    marginVertical: 10,
   },
   overlayStyles: {
     width: "80%",
