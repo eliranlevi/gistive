@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import GistListContainer from "./containers/GistListContainer";
+import { Button, Header, Overlay } from "react-native-elements";
 import { Provider } from "react-redux";
-import store from "./store";
-import StylesConsts from "./styles/consts";
-import { Header } from "react-native-elements";
+import GistListContainer from "./containers/GistListContainer";
 import SettingsContainer from "./containers/SettingsContainer";
+import store from "./store";
+import StylesConsts, { ButtonConsts } from "./styles/consts";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,23 +14,44 @@ const styles = StyleSheet.create({
     marginEnd: StylesConsts.rootMarginSide,
     marginVertical: 10,
   },
+  overlayStyles: {
+    width: "80%",
+    height: "35%",
+    borderRadius: 30,
+    display: "flex",
+    justifyContent: "space-between",
+    padding: 30,
+  },
 });
 
 export default function App(): JSX.Element {
+  const [isSettingsVisible, setSettingVisible] = useState(false);
+  const toggleSettingsOverlay = (): void => setSettingVisible(!isSettingsVisible);
+
   return (
     <Provider store={store}>
       <Header
-        leftComponent={{ icon: "settings", color: "#ffffff" }}
+        leftComponent={{ icon: "settings", color: "#ffffff", onPress: toggleSettingsOverlay }}
         centerComponent={{ text: "Gistive", style: { fontSize: 20, fontWeight: "500", color: "#ffffff" } }}
         barStyle="light-content"
         containerStyle={{
-          backgroundColor: "#454ADE",
+          backgroundColor: StylesConsts.appColorMain,
           paddingVertical: 10,
         }}
       />
       <SafeAreaView style={styles.container}>
-        {/* TODO: router */}
-        <SettingsContainer />
+        <Overlay
+          animated
+          animationType="fade"
+          fullScreen={true}
+          isVisible={isSettingsVisible}
+          onBackdropPress={(): void => setSettingVisible(false)}
+          overlayStyle={styles.overlayStyles}>
+            <>
+              <SettingsContainer />
+              <Button title="OK" onPress={(): void => setSettingVisible(false)} buttonStyle={ButtonConsts.centerButton} />
+            </>
+        </Overlay>
         <GistListContainer />
       </SafeAreaView>
     </Provider>

@@ -10,8 +10,8 @@ export const setSettings = ({ token, username }: SettingsState): ThunkAction<voi
     dispatch({
       type: SET_SETTINGS,
       payload: {
-        ...(token && { token }),
-        ...(username && { username }),
+        ...(token !== undefined && { token }),
+        ...(username !== undefined && { username }),
       },
     });
   }
