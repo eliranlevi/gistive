@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import { Gist } from "../interfaces/common";
-import GistList from "../components/GistList";
 import { getGists } from "../actions/gists";
+import GistList from "../components/GistList";
+import { Gist } from "../interfaces/common";
+import { getGists as getGistsSelector, getUsernameForGistList } from "../selectors/common";
 import { RootState } from "../store";
-import { getUsername, getGists as getGistsSelector } from "../selectors/common";
 
 interface DispatchProps {
   getGists: () => void;
@@ -15,7 +15,7 @@ interface StateProps {
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  username: getUsername(state),
+  username: getUsernameForGistList(state),
   gists: getGistsSelector(state),
 });
 

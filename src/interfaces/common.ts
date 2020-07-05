@@ -3,6 +3,11 @@ export interface Gist {
   title: string;
   files: GistFile;
   public: boolean;
+  owner: GistOwner;
+}
+
+export interface GistOwner {
+  login: string;
 }
 
 export interface ApiRequest {
