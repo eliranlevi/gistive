@@ -50,11 +50,6 @@ const GistList = ({
             <Text style={{ color: StylesConsts.textColor }}>
               No Gists here.
             </Text>
-            { !username && (
-              <Text style={{ color: StylesConsts.textColor }}>
-                Set username and hit refresh
-              </Text>
-            )}
             <Button
               disabled={!username}
               titleStyle={{ color: StylesConsts.textColor }}
@@ -63,6 +58,11 @@ const GistList = ({
               onPress={getGists}
               icon={<Icon type="font-awesome" name="refresh" style={{ paddingRight: 10}} color={StylesConsts.textColor} />}
             />
+            { !username && (
+              <Text style={{ color: StylesConsts.textColor }}>
+                Set username and hit refresh
+              </Text>
+            )}
           </View>
         )}
     </>
