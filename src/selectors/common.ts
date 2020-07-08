@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { Gist } from "../interfaces/common";
 import { SettingsState } from "../reducers/settingsReducer";
-import { RootState } from "../store";
+import { RootState } from "../store/interfaces";
 
 const getSettings = (state: RootState): SettingsState => state.settings;
 const getGistsState = (state: RootState): Gist[] => state.gists;

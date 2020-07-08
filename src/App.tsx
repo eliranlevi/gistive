@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import { Button, Header, Overlay } from "react-native-elements";
+import { Header, Overlay } from "react-native-elements";
 import { Provider } from "react-redux";
 import GistListContainer from "./containers/GistListContainer";
 import SettingsContainer from "./containers/SettingsContainer";
 import store from "./store";
-import StylesConsts, { ButtonConsts } from "./styles/consts";
+import StylesConsts from "./styles/consts";
 
 const styles = StyleSheet.create({
   container: {
@@ -44,10 +44,7 @@ export default function App(): JSX.Element {
           isVisible={isSettingsVisible}
           onBackdropPress={(): void => setSettingVisible(false)}
           overlayStyle={styles.overlayStyles}>
-            <>
-              <SettingsContainer />
-              <Button title="OK" onPress={(): void => setSettingVisible(false)} buttonStyle={ButtonConsts.centerButton} />
-            </>
+            <SettingsContainer onSubmit={(): void => setSettingVisible(false)} />
         </Overlay>
         <GistListContainer />
       </SafeAreaView>

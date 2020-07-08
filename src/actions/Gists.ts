@@ -1,10 +1,10 @@
+import { Action } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { SET_GISTS } from "../actionTypes/gists";
 import { Gist } from "../interfaces/common";
-import { ThunkAction } from "redux-thunk";
-import { RootState } from "../store";
-import { Action } from "redux";
-import { callGetGists } from "../utils/ApiUtils";
 import { getUsername } from "../selectors/common";
+import { callGetGists } from "../utils/ApiUtils";
+import { RootState } from "../store/interfaces";
 
 export const getGists = (): ThunkAction<void, RootState, unknown, Action<string>> => (
   async (dispatch, getState): Promise<void> => {

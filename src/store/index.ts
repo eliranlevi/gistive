@@ -1,18 +1,12 @@
+import { applyMiddleware, createStore, Store } from "redux";
 import ReduxThunk from "redux-thunk";
-import { createStore, applyMiddleware } from "redux";
 import rootReducer from "../reducers";
-import { SettingsState } from "../reducers/settingsReducer";
-import { Gist } from "../interfaces/common";
+import { RootState } from "./interfaces";
 
-const store = createStore(
+const store: Store<RootState> = createStore(
   rootReducer,
   {},
   applyMiddleware(ReduxThunk)
 );
-
-export interface RootState {
-  settings: SettingsState;
-  gists: Gist[];
-}
 
 export default store;

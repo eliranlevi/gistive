@@ -1,27 +1,26 @@
-import { ApiRequest } from "../interfaces/common";
 import { GISTS_API } from "../constants/common";
+import { ApiRequest } from "../interfaces/common";
 
-const COMMON_OPTIONS: RequestInit = {
-  headers: {
-    "Accept": "application/vnd.github.v3+json",
-  },
-};
+let authToken: string | undefined;
 
-export const setAuthHeader = (token: string): void => {
-  COMMON_OPTIONS.headers = {
-    ...COMMON_OPTIONS.headers,
-    "Authorization": `Bearer ${token}`,
-  };
-};
-
-export const callApi = async ({
+const callApi = async ({
   url,
   options,
 }: ApiRequest): Promise<Response> => {
-  return await fetch(url, {
+  const init = {
     ...options,
-    ...COMMON_OPTIONS,
-  });
+    headers: {
+      "Cache-Control": "no-cache",
+      "Accept": "application/vnd.github.v3+json",
+      ...(authToken && {"Authorization": `Bearer ${authToken}`}),
+    },
+  };
+
+  return await fetch(url, init);
+};
+
+export const setAuthToken = (token: string | undefined): void => {
+  authToken = token;
 };
 
 export const callGetGists = async (username: string): Promise<Response> => {
