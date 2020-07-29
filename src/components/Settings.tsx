@@ -1,29 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
-import { Input } from "react-native-elements";
+import { Input, Button } from "react-native-elements";
 import { SettingsProps } from "../containers/SettingsContainer";
-import StylesConsts from "../styles/consts";
+import StylesConsts, { ButtonConsts } from "../styles/consts";
 
 const Settings = ({
-  username,
-  token,
-  setToken,
-  setUsername,
-}: SettingsProps): JSX.Element => (
-  <View>
-    <Input label="Username"
-           defaultValue={username}
-           placeholder="Enter username"
-           onChangeText={(username): void => setUsername(username)}
-           inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }}
-           autoCapitalize="none" />
-    <Input label="Access Token"
-           defaultValue={token}
-           placeholder="Enter access token"
-           onChangeText={(token): void => setToken(token)}
-           inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }}
-           autoCapitalize="none" />
-  </View>
-);
+  defaultUsername,
+  defaultToken,
+  setSettings,
+  onSubmit,
+}: SettingsProps): JSX.Element => {
+  const [token, setToken] = useState(defaultToken);
+  const [username, setUsername] = useState(defaultUsername);
+  const onOkPress = (): void => {
+    setSettings({ token, username });
+    onSubmit();
+  };
+
+  return (
+    <View>
+      <Input label="Username"
+             defaultValue={defaultUsername}
+             placeholder="Enter username"
+             onChangeText={(username): void => setUsername(username)}
+             inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }}
+             autoCapitalize="none" />
+      <Input label="Access Token"
+             defaultValue={defaultToken}
+             placeholder="Enter access token"
+             onChangeText={(token): void => setToken(token)}
+             inputContainerStyle={{ borderBottomColor: StylesConsts.appColorMain }}
+             autoCapitalize="none" />
+      <Button title="OK" onPress={onOkPress} buttonStyle={ButtonConsts.centerButton} />
+    </View>
+  );
+};
 
 export default Settings;

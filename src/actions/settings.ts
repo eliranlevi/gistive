@@ -1,12 +1,20 @@
 import { SET_SETTINGS } from "../actionTypes/settings";
 import { ThunkAction } from "redux-thunk";
-import { RootState } from "../store";
 import { Action } from "redux";
 import { SettingsState } from "../reducers/settingsReducer";
-import { setAuthHeader } from "../utils/ApiUtils";
+import { setAuthToken } from "../utils/ApiUtils";
+import { RootState } from "../store/interfaces";
+import { getSettings, storeSettings } from "../utils/Storage";
 
-export const setSettings = ({ token, username }: SettingsState): ThunkAction<void, RootState, unknown, Action<string>> => (
-  (dispatch): void => {
+export const setSettings = ({ token, username }: SettingsState): ThunkAction<Promise<void>, RootState, unknown, Action<string>> => (
+  async (dispatch): Promise<void> => {
+    setAuthToken(token);
+
+    await storeSettings({
+      username,
+      token,
+    });
+
     dispatch({
       type: SET_SETTINGS,
       payload: {
@@ -17,15 +25,10 @@ export const setSettings = ({ token, username }: SettingsState): ThunkAction<voi
   }
 );
 
-export const setToken = (token: string): ThunkAction<void, RootState, unknown, Action<string>> => (
-  (dispatch): void => {
-    setAuthHeader(token);
-    dispatch(setSettings({ token }));
-  }
-);
+export const getSettingsFromStorage = (): ThunkAction<Promise<void>, RootState, unknown, Action<string>> => (
+  async (dispatch): Promise<void> => {
+    const storageSettings = await getSettings();
 
-export const setUsername = (username: string): ThunkAction<void, RootState, unknown, Action<string>> => (
-  (dispatch): void => {
-    dispatch(setSettings({ username }));
+    !!storageSettings && dispatch(setSettings(storageSettings));
   }
 );

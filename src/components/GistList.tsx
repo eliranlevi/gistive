@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, View } from "react-native";
 import { Button, Icon, Text } from "react-native-elements";
 import { GistListProps } from "../containers/GistListContainer";
@@ -10,7 +10,13 @@ const GistList = ({
   username,
   gists,
   getGists,
+  getSettingsFromStorage,
 }: GistListProps): JSX.Element => {
+
+  useEffect(() => {
+    getSettingsFromStorage();
+  }, []);
+
   return (
     <>
       {gists.length

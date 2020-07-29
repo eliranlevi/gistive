@@ -3,10 +3,12 @@ import { getGists } from "../actions/gists";
 import GistList from "../components/GistList";
 import { Gist } from "../interfaces/common";
 import { getGists as getGistsSelector, getUsernameForGistList } from "../selectors/common";
-import { RootState } from "../store";
+import { RootState } from "../store/interfaces";
+import { getSettingsFromStorage } from "../actions/settings";
 
 interface DispatchProps {
   getGists: () => void;
+  getSettingsFromStorage: () => void;
 }
 
 interface StateProps {
@@ -21,6 +23,7 @@ const mapStateToProps = (state: RootState): StateProps => ({
 
 const mapDispatchToProps: DispatchProps = {
   getGists,
+  getSettingsFromStorage,
 };
 
 export type GistListProps = StateProps & DispatchProps;

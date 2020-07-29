@@ -1,30 +1,33 @@
 import { connect } from "react-redux";
-import { setToken, setUsername } from "../actions/settings";
+import { setSettings } from "../actions/settings";
 import Settings from "../components/Settings";
+import { SettingsState } from "../reducers/settingsReducer";
 import { getToken, getUsername } from "../selectors/common";
-import { RootState } from "../store";
+import { RootState } from "../store/interfaces";
+
+interface ComponentProps {
+  onSubmit: () => void;
+}
 
 interface DispatchProps {
-  setToken: (token: string) => void;
-  setUsername: (username: string) => void;
+  setSettings: (settings: SettingsState) => void;
 }
 
 interface StateProps {
-  token: string;
-  username: string;
+  defaultToken: string;
+  defaultUsername: string;
 }
 
 const mapStateToProps = (state: RootState): StateProps => ({
-  token: getToken(state),
-  username: getUsername(state),
+  defaultToken: getToken(state),
+  defaultUsername: getUsername(state),
 });
 
 const mapDispatchToProps: DispatchProps = {
-  setToken,
-  setUsername,
+  setSettings,
 };
 
-export type SettingsProps = StateProps & DispatchProps;
+export type SettingsProps = ComponentProps & StateProps & DispatchProps;
 
 export default connect(
   mapStateToProps,
