@@ -7,15 +7,22 @@ import StylesConsts from "../styles/consts";
 import GistItem from "./GistItem";
 
 const GistList = ({
+  navigation,
   username,
   gists,
   getGists,
   getSettingsFromStorage,
+  setSelectedGist,
 }: GistListProps): JSX.Element => {
 
   useEffect(() => {
     getSettingsFromStorage();
   }, []);
+
+  function onGistPress(gist: Gist): void {
+    setSelectedGist(gist);
+    navigation.navigate("GistScreen");
+  }
 
   return (
     <>
@@ -45,7 +52,7 @@ const GistList = ({
               keyExtractor={(item, index): string => index.toString()}
               data={gists}
               renderItem={({ item: gist }: { item: Gist }): JSX.Element => (
-                <GistItem key={gist.id} gist={gist} />
+                <GistItem key={gist.id} gist={gist} onGistPress={(): void => onGistPress(gist)} />
               )}
             />
           </View>

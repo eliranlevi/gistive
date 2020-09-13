@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { SET_GISTS } from "../actionTypes/gists";
+import { SET_GISTS, SET_SELECTED_GIST } from "../actionTypes/gists";
 import { Gist } from "../interfaces/common";
 import { getUsername } from "../selectors/common";
 import { callGetGists } from "../utils/ApiUtils";
@@ -14,7 +14,7 @@ export const getGists = (): ThunkAction<void, RootState, unknown, Action<string>
 
       dispatch({
         type: SET_GISTS,
-        payload: gists.map((g: Gist) => ({
+        payload: gists.map((g: Gist): Gist => ({
           ...g,
           title: Object.keys(g.files)[0],
         })),
@@ -27,3 +27,13 @@ export const getGists = (): ThunkAction<void, RootState, unknown, Action<string>
     }
   }
 );
+
+export const setSelectedGist = (gist: Gist): ThunkAction<void, RootState, unknown, Action<string>> => (
+  (dispatch): void => {
+    dispatch({
+      type: SET_SELECTED_GIST,
+      payload: gist.id,
+    });
+  }
+);
+

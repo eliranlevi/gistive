@@ -1,5 +1,5 @@
+import { GistsState } from "../reducers/gistsReducer";
 import { SettingsState } from "../reducers/settingsReducer";
-import { Gist } from "../interfaces/common";
 
 export interface Action<T> {
   type: string;
@@ -8,5 +8,5 @@ export interface Action<T> {
 
 export interface RootState {
   settings: SettingsState;
-  gists: Gist[];
+  gists: GistsState;
 }
